@@ -1,0 +1,5 @@
+Task,Status,Input Tokens,Output Tokens,Total Latency (s),Prompt Eval (s),Tokens/Sec
+Function Generation,Success,88,343,148.44,16.05,3.11
+Fill-In-The-Middle (FIM),Error: 400 Client Error: Bad Request for url: http://localhost:11435/api/generate,,,,,
+Bug Fixing,Success,108,203,69.43,8.65,3.35
+Unit Test Generation,Success,88,428,145.05,4.54,3.05
