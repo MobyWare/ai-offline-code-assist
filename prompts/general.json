@@ -1,0 +1,42 @@
+[
+  {
+    "name": "FIM Python: Loop Logic",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "<｜fim begin｜>def get_even_numbers(data):\n    evens = []\n    for x in data:<｜fim hole｜>\n    return evens<｜fim end｜>",
+      "stream": false
+    }
+  },
+  {
+    "name": "FIM HTML: Tag Attributes",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "<｜fim begin｜><button class=\"btn-primary\" <｜fim hole｜>>Submit</button><｜fim end｜>",
+      "stream": false
+    }
+  },
+  {
+    "name": "FIM JS: Promise Chain",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "<｜fim begin｜>fetch('/api/user')\n  .then(res => res.json())\n  <｜fim hole｜>\n  .catch(err => console.error(err));<｜fim end｜>",
+      "stream": false
+    }
+  },
+  {
+    "name": "Instruction: SQL Generator",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "Write a PostgreSQL query to find the top 5 users who spent the most money in the last 30 days.",
+      "stream": false
+    }
+  },
+  {
+    "name": "Instruction: Unit Test",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "Create a Python unittest class for a function `add(a, b)` that handles negative numbers.",
+      "stream": false
+    }
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Method Completion (Python)",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "<｜fim begin｜>import os\nos.path.j<｜fim hole｜><｜fim end｜>",
+      "stream": false,
+      "options": {
+        "num_predict": 10,
+        "temperature": 0,
+        "stop": ["\n", "(", " ", "｜"]
+      }
+    }
+  },
+  {
+    "name": "Variable Logic (Javascript)",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "<｜fim begin｜>const isAdmin = user.role === 'admin';\nif (isAd<｜fim hole｜>) {<｜fim end｜>",
+      "stream": false,
+      "options": {
+        "num_predict": 10,
+        "temperature": 0,
+        "stop": [" ", ")", "{", "｜"]
+      }
+    }
+  },
+  {
+    "name": "Line Completion (C++)",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "<｜fim begin｜>#include <iostream>\nint main() {\n    std::cout << \"He<｜fim hole｜>;\n    return 0;\n}<｜fim end｜>",
+      "stream": false,
+      "options": {
+        "num_predict": 20,
+        "temperature": 0,
+        "stop": [";", "\n", "｜"]
+      }
+    }
+  },
+  {
+    "name": "Property Access (TypeScript)",
+    "payload": {
+      "model": "deepseek-coder:6.7b",
+      "prompt": "<｜fim begin｜>interface User { name: string; age: number; }\nconst u: User = { name: 'Alice', age: 30 };\nconsole.log(u.<｜fim hole｜>);<｜fim end｜>",
+      "stream": false,
+      "options": {
+        "num_predict": 10,
+        "temperature": 0,
+        "stop": [";", ")", "\n", "｜"]
+      }
+    }
+  }
+]
