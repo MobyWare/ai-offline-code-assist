@@ -1,0 +1,47 @@
+services:
+  # VS Code IDE
+  code-server:
+    image: ai-vscode-ide:latest
+    ports:
+      - "8080:8080"
+    # volumes:
+    #   - ./project:/home/coder/project
+
+  # Jupyter IDE (JupyterLab, No Auth)
+  jupyter:
+    image: ai-jupyter-ide:latest
+    ports:
+      - "8888:8888"
+    # volumes:
+    #   - ./project:/home/jovyan/work
+    # Force JupyterLab and disable all token/password auth
+    environment:
+      - DOCKER_STACKS_JUPYTER_CMD=lab
+
+  # Ollama - CPU Mode
+  ollama:
+    image: ai-code-server:latest
+    ports:
+      - "${OLLAMA_HOST_PORT}:11434"
+    # volumes:
+    #   - ollama_data:/root/.ollama
+    profiles: ["cpu"]
+
+  # Ollama - GPU Mode
+  ollama-gpu:
+    image: ai-code-server:latest
+    ports:
+      - "${OLLAMA_HOST_PORT}:11434"
+    # volumes:
+    #   - ollama_data:/root/.ollama
+    profiles: ["gpu"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+# volumes:
+#   ollama_data:

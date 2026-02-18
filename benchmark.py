@@ -27,6 +27,8 @@ def run_benchmark():
     parser.add_argument("--output", default="./scratch/benchmark_results.csv", help="CSV output")
     parser.add_argument("--no-warm", action="store_true", help="Skip the pre-warm step")
     parser.add_argument("--timeout", default=120, help="Request timeout in seconds (120 default)")
+    # Model Override Argument (The Default is the 1.3b model for speed)
+    parser.add_argument("--model", default="deepseek-coder:1.3b", help="Override the model used for all tests (default: deepseek-coder:1.3b)")
     
     args = parser.parse_args()
     full_url = f"{args.host.rstrip('/')}:{args.port}{args.path}"
@@ -49,10 +51,14 @@ def run_benchmark():
     # Step 2: Run Suite
     for case in test_cases:
         name = case.get("name", "Unnamed Task")
+        # OVERRIDE: Force the model from the CLI argument onto the request payload
+        payload = case.get("payload", {})
+        payload["model"] = args.model
+
         print(f"🚀 Running: {name}...", end=" ", flush=True)
         
         try:
-            response = requests.post(full_url, json=case["payload"], timeout=args.timeout)
+            response = requests.post(full_url, json=payload, timeout=args.timeout)
             response.raise_for_status()
             data = response.json()
 
@@ -61,16 +67,18 @@ def run_benchmark():
 
             results.append({
                 "Task": name,
+                "Model": args.model,
                 "Status": "Success",
                 "Tokens/Sec": round(tps, 2),
-                "Latency (s)": round(data.get("total_duration", 0) / 1e9, 2),
-                "Output Length": data.get("eval_count", 0)
+                "TTFT (s)": round(ttft, 3),
+                "Total Latency (s)": round(total_dur, 3),
+                "Response": data.get("response", "").strip().replace("\n", "\\n")
             })
             print(f"DONE ({round(tps, 2)} tok/s)")
 
         except Exception as e:
             print(f"FAILED")
-            results.append({"Task": name, "Status": f"Error: {str(e)}"})
+            results.append({"Task": name, "Model": args.model, "Status": f"Error: {str(e)}"})
 
     # Step 3: Save Results
     with open(args.output, 'w', newline='', encoding='utf-8') as f:

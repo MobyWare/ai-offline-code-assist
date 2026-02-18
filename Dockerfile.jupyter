@@ -1,0 +1,15 @@
+FROM jupyter/base-notebook:latest
+
+USER root
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Copy the server configuration file
+COPY ides/jupyter_config_gpu.py /etc/jupyter/jupyter_server_config.py
+
+USER ${NB_UID}
+RUN pip install --no-cache-dir \
+    jupyterlab \
+    jupyter-ai[all] \
+    langchain-ollama
+
+WORKDIR /home/jovyan/work

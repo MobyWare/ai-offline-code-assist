@@ -1,0 +1,20 @@
+FROM codercom/code-server:latest
+
+# Install the extension
+RUN code-server --install-extension Continue.continue
+
+# Create the config directory
+RUN mkdir -p /home/coder/.config/code-server
+# Copy the "no-password" config file
+COPY ides/vscode-config.yaml /home/coder/.config/code-server/config.yaml
+
+# Create config directory and copy pre-configured file
+RUN mkdir -p /home/coder/.continue
+COPY ides/vscode-config-gpu.json /home/coder/.continue/config.json
+
+# Ensure the 'coder' user owns the config
+USER root
+RUN chown -R coder:coder /home/coder/.continue && chown -R coder:coder /home/coder/.config
+USER coder
+
+WORKDIR /home/coder/project

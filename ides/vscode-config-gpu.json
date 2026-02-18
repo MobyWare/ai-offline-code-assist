@@ -1,0 +1,21 @@
+{
+  "models": [
+    {
+      "title": "DeepSeek 6.7B (Chat)",
+      "provider": "ollama",
+      "model": "deepseek-coder:6.7b",
+      "apiBase": "http://ollama-gpu:11434"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "DeepSeek 1.3B (Fast)",
+    "provider": "ollama",
+    "model": "deepseek-coder:1.3b",
+    "apiBase": "http://ollama-gpu:11434"
+  },
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text",
+    "apiBase": "http://ollama-gpu:11434"
+  }
+}

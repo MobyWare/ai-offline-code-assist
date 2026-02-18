@@ -10,6 +10,7 @@ ENV OLLAMA_ORIGINS="*"
 RUN nohup bash -c "ollama serve &" && \
     sleep 5 && \
     ollama pull deepseek-coder:6.7b && \
+    ollama pull deepseek-coder:1.3b && \
     pkill ollama
 
 # Expose the REST API port
