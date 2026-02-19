@@ -1,4 +1,6 @@
-image:
+image/all: image/ai image/ides
+
+image/ai:
 	docker build -t ai-code-server:latest .
 
 image/ides:
@@ -11,7 +13,7 @@ image/jupyter:
 image/vscode:
 	docker build -f Dockerfile.vscode -t ai-vscode-ide:latest .
 
-up:
+up: down
 	docker compose up -d
 
 down:
